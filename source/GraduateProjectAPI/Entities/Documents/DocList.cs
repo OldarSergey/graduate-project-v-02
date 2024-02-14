@@ -50,7 +50,7 @@ public partial class DocList
     /// <summary>
     /// Дата окончания действия документа
     /// </summary>
-    public DateTime? Finished { get; set; }
+    //public DateTime? Finished { get; set; }
 
     /// <summary>
     /// Внутренний рег.№

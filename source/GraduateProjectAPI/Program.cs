@@ -1,11 +1,32 @@
+using GraduateProjectAPI.Persistence;
+using GraduateProjectAPI.Service;
+using GraduateProjectAPI.Service.Interface;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IDocumentService, DocumentService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.AllowAnyOrigin();
+    });
+});
+
+var configuration = builder.Configuration;
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(configuration.GetConnectionString("AtomexDbConnection")));
 
 var app = builder.Build();
 
@@ -16,8 +37,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
 
+app.UseHttpsRedirection();
+app.UseRouting();
+app.UseCors("AllowAll");
 app.UseAuthorization();
 
 app.MapControllers();

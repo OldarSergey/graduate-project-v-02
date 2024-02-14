@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GraduateProjectAPI.DTO;
 using GraduateProjectAPI.Entities.Documents;
 using Microsoft.EntityFrameworkCore;
 
@@ -91,6 +92,9 @@ public partial class ApplicationDbContext : DbContext
     public virtual DbSet<DocVersion> DocVersions { get; set; }
 
     public virtual DbSet<DocVersionProcessing> DocVersionProcessings { get; set; }
+
+
+   
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -315,9 +319,10 @@ public partial class ApplicationDbContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasComment("Фактическая дата документа (по умолчанию = Created).")
                 .HasColumnType("smalldatetime");
-            entity.Property(e => e.Finished)
-                .HasComment("Дата окончания действия документа")
-                .HasColumnType("datetime");
+            //entity.Property(e => e.Finished)
+            //    .HasComment("Дата окончания действия документа")
+            //    .HasColumnType("datetime")
+            //    .IsRequired(false);
             entity.Property(e => e.Flags).HasComment("Набор бинарных флагов. Младшие два байта зарезервированы документооборотом, старшие два байта предоставлены подсистемам.");
             entity.Property(e => e.KeyNote)
                 .HasComment("Вид документа")
@@ -1658,4 +1663,7 @@ public partial class ApplicationDbContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+
+
 }
