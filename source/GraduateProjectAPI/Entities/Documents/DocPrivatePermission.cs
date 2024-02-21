@@ -52,4 +52,8 @@ public partial class DocPrivatePermission
     public virtual DocList? KeyBaseNavigation { get; set; }
 
     public virtual DocNote? KeyNotesNavigation { get; set; }
+
+    public virtual SSubject KeyUserOwnerNavigation { get; set; } = null!;
+
+    public virtual SSubject KeyUserPermitedNavigation { get; set; } = null!;
 }

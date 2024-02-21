@@ -33,4 +33,6 @@ public partial class DocPrivateSelection
     public virtual ICollection<DocPrivateSelection> InverseKeyParentNavigation { get; set; } = new List<DocPrivateSelection>();
 
     public virtual DocPrivateSelection? KeyParentNavigation { get; set; }
+
+    public virtual SSubject? KeyUserOwnerNavigation { get; set; }
 }

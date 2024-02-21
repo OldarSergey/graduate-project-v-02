@@ -50,7 +50,7 @@ public partial class DocList
     /// <summary>
     /// Дата окончания действия документа
     /// </summary>
-    //public DateTime? Finished { get; set; }
+    public DateTime? Finished { get; set; }
 
     /// <summary>
     /// Внутренний рег.№
@@ -116,4 +116,6 @@ public partial class DocList
     public virtual DocList? KeyParentNavigation { get; set; }
 
     public virtual DocPrivacy KeyPrivacyNavigation { get; set; } = null!;
+
+    public virtual SSubject KeyUsersNavigation { get; set; } = null!;
 }

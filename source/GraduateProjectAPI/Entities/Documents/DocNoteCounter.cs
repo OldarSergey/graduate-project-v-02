@@ -30,5 +30,7 @@ public partial class DocNoteCounter
 
     public int KeyNote { get; set; }
 
+    public virtual SSubject? KeyDepartmentNavigation { get; set; }
+
     public virtual DocNote KeyNotesNavigation { get; set; } = null!;
 }

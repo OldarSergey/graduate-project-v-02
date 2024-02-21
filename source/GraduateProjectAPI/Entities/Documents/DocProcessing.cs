@@ -94,4 +94,8 @@ public partial class DocProcessing
     public virtual DocList KeyDocNavigation { get; set; } = null!;
 
     public virtual DocOperation? KeyOperationNavigation { get; set; }
+
+    public virtual SSubject KeyUserExecutorNavigation { get; set; } = null!;
+
+    public virtual SSubject KeyUserSenderNavigation { get; set; } = null!;
 }

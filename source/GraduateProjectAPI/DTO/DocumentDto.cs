@@ -1,10 +1,11 @@
-﻿using GraduateProjectAPI.Entities.Documents;
+﻿
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace GraduateProjectAPI.DTO
 {
     public class DocumentDto
     {
+        public int Id { get; set; }
         public string RegistrationNumber {  get; set; }
         public DateTime Date { get; set; }
         public string Created {  get; set; }

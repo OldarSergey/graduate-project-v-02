@@ -1,3 +1,4 @@
+
 using GraduateProjectAPI.Persistence;
 using GraduateProjectAPI.Service;
 using GraduateProjectAPI.Service.Interface;
@@ -8,10 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddScoped<IDocumentService, DocumentService>();
+//builder.Services.AddScoped<IDocumentService, DocumentService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IDocumentService, DocumentService>();
 
 builder.Services.AddCors(options =>
 {

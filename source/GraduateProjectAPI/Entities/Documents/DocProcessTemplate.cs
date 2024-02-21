@@ -55,4 +55,6 @@ public partial class DocProcessTemplate
     public virtual DocOperation? KeyOperationNavigation { get; set; }
 
     public virtual DocRoute KeyRouteNavigation { get; set; } = null!;
+
+    public virtual SSubject? KeyUserExecutorNavigation { get; set; }
 }

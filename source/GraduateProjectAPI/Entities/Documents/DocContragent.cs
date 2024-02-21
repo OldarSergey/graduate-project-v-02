@@ -44,4 +44,6 @@ public partial class DocContragent
     public virtual DocContragentType KeyContragentTypeNavigation { get; set; } = null!;
 
     public virtual DocList KeyDocNavigation { get; set; } = null!;
+
+    public virtual SSubject KeySubNavigation { get; set; } = null!;
 }

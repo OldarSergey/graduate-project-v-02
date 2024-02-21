@@ -39,5 +39,7 @@ public partial class DocVersionProcessing
 
     public virtual DocOperation KeyOperationNavigation { get; set; } = null!;
 
+    public virtual SSubject KeyUserExecutorNavigation { get; set; } = null!;
+
     public virtual DocVersion KeyVersionNavigation { get; set; } = null!;
 }

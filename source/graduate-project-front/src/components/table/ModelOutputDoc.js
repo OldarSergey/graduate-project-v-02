@@ -1,31 +1,37 @@
-function ModelOutputDoc({ documents }) {
-    return (
-        <div className="centered-content">
-                <table className="doc-table"> 
-                    <thead>
-                        <tr>
-                            <th>Внутренний рег. №</th>
-                            <th>Дата</th>
-                            <th>Создатель</th>
-                            <th>Комментарий</th>
-                            <th>Вид документа</th>
-                            <th>Личный комментарий</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {documents.map((document, index) => (
-                            <tr key={index}>
-                                <td>{document.registrationNumber}</td>
-                                <td>{document.date}</td>
-                                <td>{document.created}</td>
-                                <td>{document.publicComment}</td>
-                                <td>{document.typeDoc}</td>
-                                <td>{document.privateComment}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-        </div>
+import React, { useMemo } from 'react';
+import Table from './Table';
+function ModelOutputDoc({ documents, onDocumentClick }) {
+    const columns = useMemo(
+        () => [
+            {
+                Header: 'Внутренний рег. №',
+                accessor: 'registrationNumber',
+            },
+            {
+                Header: 'Дата',
+                accessor: 'date',
+            },
+            {
+                Header: 'Создатель',
+                accessor: 'created',
+            },
+            {
+                Header: 'Комментарий',
+                accessor: 'publicComment',
+            },
+            {
+                Header: 'Вид документа',
+                accessor: 'typeDoc',
+            },
+            {
+                Header: 'Личный комментарий',
+                accessor: 'privateComment',
+            },
+        ],
+        []
     );
+
+    return <Table columns={columns} data={documents} onDocumentClick={(documentId)=>onDocumentClick(documentId)} />;
 }
-export default ModelOutputDoc
+
+export default ModelOutputDoc;

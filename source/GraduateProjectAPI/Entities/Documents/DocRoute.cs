@@ -39,4 +39,6 @@ public partial class DocRoute
     public virtual ICollection<DocRouteDependence> DocRouteDependences { get; set; } = new List<DocRouteDependence>();
 
     public virtual DocNote KeyNoteNavigation { get; set; } = null!;
+
+    public virtual SSubject? KeyUserOwnerNavigation { get; set; }
 }

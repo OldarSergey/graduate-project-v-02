@@ -18,4 +18,6 @@ public partial class DocSupervision
     public int KeyUserSupervisor { get; set; }
 
     public virtual DocList KeyDocNavigation { get; set; } = null!;
+
+    public virtual SSubject KeyUserSupervisorNavigation { get; set; } = null!;
 }

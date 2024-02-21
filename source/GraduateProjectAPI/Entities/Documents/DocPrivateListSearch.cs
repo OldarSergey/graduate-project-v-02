@@ -28,4 +28,6 @@ public partial class DocPrivateListSearch
     public string? Value { get; set; }
 
     public virtual DocPropertyType KeyPropertyTypeNavigation { get; set; } = null!;
+
+    public virtual SSubject KeyUserOwnerNavigation { get; set; } = null!;
 }

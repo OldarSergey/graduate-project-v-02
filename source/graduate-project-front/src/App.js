@@ -1,20 +1,20 @@
 import './App.css';
-import IncomingDocWork from './components/IncomingDocWork';
-import SidePanel from './components/SidePanel';
-
+import SidePanel from './components/panelNavigation/SidePanel';
+import {Routes, Route} from 'react-router-dom'
+import IncomingDocWork from './pages/IncomingDocWork';
+import OutgoingDocWork from './pages/OutgoingDocWork';
 function App() {
   return (
-    <div className="App">
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-3">
-            <SidePanel />
-          </div>
-          <div className="col-md-9">
-            <IncomingDocWork />
-          </div>
-        </div>
-      </div>
+    <div className="flex">
+      <SidePanel>
+      </SidePanel>
+  
+
+
+      <Routes>
+        <Route path='/IncomingDocWork' element={<IncomingDocWork/>}/>
+        <Route path='/OutgoingDocWork' element={<OutgoingDocWork/>} />
+      </Routes>
     </div>
   );
 }

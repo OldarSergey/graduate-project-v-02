@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GraduateProjectAPI.DTO;
 using GraduateProjectAPI.Entities.Documents;
 using Microsoft.EntityFrameworkCore;
 
@@ -93,8 +92,7 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<DocVersionProcessing> DocVersionProcessings { get; set; }
 
-
-   
+    public virtual DbSet<SSubject> SSubjects { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -154,6 +152,11 @@ public partial class ApplicationDbContext : DbContext
             entity.HasOne(d => d.KeyDocNavigation).WithMany(p => p.DocContragents)
                 .HasForeignKey(d => d.KeyDoc)
                 .HasConstraintName("Contragents_KeyDoc_CD");
+
+            entity.HasOne(d => d.KeySubNavigation).WithMany(p => p.DocContragents)
+                .HasForeignKey(d => d.KeySub)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Contragents_KeySub");
         });
 
         modelBuilder.Entity<DocContragentAccount>(entity =>
@@ -319,10 +322,9 @@ public partial class ApplicationDbContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasComment("Фактическая дата документа (по умолчанию = Created).")
                 .HasColumnType("smalldatetime");
-            //entity.Property(e => e.Finished)
-            //    .HasComment("Дата окончания действия документа")
-            //    .HasColumnType("datetime")
-            //    .IsRequired(false);
+            entity.Property(e => e.Finished)
+                .HasComment("Дата окончания действия документа")
+                .HasColumnType("datetime");
             entity.Property(e => e.Flags).HasComment("Набор бинарных флагов. Младшие два байта зарезервированы документооборотом, старшие два байта предоставлены подсистемам.");
             entity.Property(e => e.KeyNote)
                 .HasComment("Вид документа")
@@ -380,6 +382,11 @@ public partial class ApplicationDbContext : DbContext
                 .HasForeignKey(d => d.KeyPrivacy)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("DocList_KeyPrivacy");
+
+            entity.HasOne(d => d.KeyUsersNavigation).WithMany(p => p.DocLists)
+                .HasForeignKey(d => d.KeyUsers)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("DocList_KeyUsers");
         });
 
         modelBuilder.Entity<DocNote>(entity =>
@@ -565,6 +572,10 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.Version)
                 .IsRowVersion()
                 .IsConcurrencyToken();
+
+            entity.HasOne(d => d.KeyDepartmentNavigation).WithMany(p => p.DocNoteCounters)
+                .HasForeignKey(d => d.KeyDepartment)
+                .HasConstraintName("NoteCounters_KeyDivision");
 
             entity.HasOne(d => d.KeyNotesNavigation).WithMany(p => p.DocNoteCounters)
                 .HasForeignKey(d => d.KeyNotes)
@@ -999,6 +1010,10 @@ public partial class ApplicationDbContext : DbContext
             entity.HasOne(d => d.KeyPropertyTypeNavigation).WithMany(p => p.DocPrivateListSearches)
                 .HasForeignKey(d => d.KeyPropertyType)
                 .HasConstraintName("PrivateListSearch_KeyPropertyType_CD");
+
+            entity.HasOne(d => d.KeyUserOwnerNavigation).WithMany(p => p.DocPrivateListSearches)
+                .HasForeignKey(d => d.KeyUserOwner)
+                .HasConstraintName("PrivateListSearch_KeyUserOwner_CD");
         });
 
         modelBuilder.Entity<DocPrivatePermission>(entity =>
@@ -1043,6 +1058,16 @@ public partial class ApplicationDbContext : DbContext
             entity.HasOne(d => d.KeyNotesNavigation).WithMany(p => p.DocPrivatePermissions)
                 .HasForeignKey(d => d.KeyNotes)
                 .HasConstraintName("DocPrivatePermissions_KeyNote");
+
+            entity.HasOne(d => d.KeyUserOwnerNavigation).WithMany(p => p.DocPrivatePermissionKeyUserOwnerNavigations)
+                .HasForeignKey(d => d.KeyUserOwner)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("DocPrivatePermissions_KeyUserOwner");
+
+            entity.HasOne(d => d.KeyUserPermitedNavigation).WithMany(p => p.DocPrivatePermissionKeyUserPermitedNavigations)
+                .HasForeignKey(d => d.KeyUserPermited)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("DocPrivatePermissions_KeyUserPermited");
         });
 
         modelBuilder.Entity<DocPrivateSelection>(entity =>
@@ -1068,6 +1093,10 @@ public partial class ApplicationDbContext : DbContext
             entity.HasOne(d => d.KeyParentNavigation).WithMany(p => p.InverseKeyParentNavigation)
                 .HasForeignKey(d => d.KeyParent)
                 .HasConstraintName("DocPrivateSelections_KeyParent");
+
+            entity.HasOne(d => d.KeyUserOwnerNavigation).WithMany(p => p.DocPrivateSelections)
+                .HasForeignKey(d => d.KeyUserOwner)
+                .HasConstraintName("DocPrivateSelections_KeySub");
         });
 
         modelBuilder.Entity<DocProcessRelation>(entity =>
@@ -1144,6 +1173,10 @@ public partial class ApplicationDbContext : DbContext
             entity.HasOne(d => d.KeyRouteNavigation).WithMany(p => p.DocProcessTemplates)
                 .HasForeignKey(d => d.KeyRoute)
                 .HasConstraintName("Template_KeyRoute_CD");
+
+            entity.HasOne(d => d.KeyUserExecutorNavigation).WithMany(p => p.DocProcessTemplates)
+                .HasForeignKey(d => d.KeyUserExecutor)
+                .HasConstraintName("ProcessTemplate_KeyUserExecutor");
         });
 
         modelBuilder.Entity<DocProcessing>(entity =>
@@ -1234,6 +1267,16 @@ public partial class ApplicationDbContext : DbContext
             entity.HasOne(d => d.KeyOperationNavigation).WithMany(p => p.DocProcessings)
                 .HasForeignKey(d => d.KeyOperation)
                 .HasConstraintName("Processing_KeyOperation");
+
+            entity.HasOne(d => d.KeyUserExecutorNavigation).WithMany(p => p.DocProcessingKeyUserExecutorNavigations)
+                .HasForeignKey(d => d.KeyUserExecutor)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Processing_KeyUserExecutor");
+
+            entity.HasOne(d => d.KeyUserSenderNavigation).WithMany(p => p.DocProcessingKeyUserSenderNavigations)
+                .HasForeignKey(d => d.KeyUserSender)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Processing_KeyUserSender");
         });
 
         modelBuilder.Entity<DocProperty>(entity =>
@@ -1477,6 +1520,11 @@ public partial class ApplicationDbContext : DbContext
                 .HasForeignKey(d => d.KeyNote)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("DocRoutes_KeyNote");
+
+            entity.HasOne(d => d.KeyUserOwnerNavigation).WithMany(p => p.DocRoutes)
+                .HasForeignKey(d => d.KeyUserOwner)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("Routes_KeyUserOwner_CD");
         });
 
         modelBuilder.Entity<DocRouteDependence>(entity =>
@@ -1555,6 +1603,11 @@ public partial class ApplicationDbContext : DbContext
                 .HasForeignKey(d => d.KeyDoc)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Supervisions_KeyDoc");
+
+            entity.HasOne(d => d.KeyUserSupervisorNavigation).WithMany(p => p.DocSupervisions)
+                .HasForeignKey(d => d.KeyUserSupervisor)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Supervisions_KeyUserSupervisor");
         });
 
         modelBuilder.Entity<DocTemplateRelation>(entity =>
@@ -1653,17 +1706,152 @@ public partial class ApplicationDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("VersionProcessing_KeyOperation");
 
+            entity.HasOne(d => d.KeyUserExecutorNavigation).WithMany(p => p.DocVersionProcessings)
+                .HasForeignKey(d => d.KeyUserExecutor)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("VersionProcessing_KeyUserExecutor");
+
             entity.HasOne(d => d.KeyVersionNavigation).WithMany(p => p.DocVersionProcessings)
                 .HasForeignKey(d => d.KeyVersion)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("VersionProcessing_KeyVersion_CD");
         });
 
+        modelBuilder.Entity<SSubject>(entity =>
+        {
+            entity.HasKey(e => e.KeySub).HasName("PK_Subjects_Key_Sub");
+
+            entity.ToTable("S_Subjects");
+
+            entity.HasIndex(e => e.KeyClass, "FK_Subjects_Key_Class").HasFillFactor(80);
+
+            entity.HasIndex(e => new { e.KeySubMaster, e.Flags, e.KeySub }, "IDX_SSubjects_KeySubMaster_Flags_KeySub_IncCode").IsUnique();
+
+            entity.HasIndex(e => e.KeySub, "IDX_SSubjects_KeySub_IncCode").IsUnique();
+
+            entity.HasIndex(e => e.Code, "IX_SSubjects_CodSub");
+
+            entity.HasIndex(e => e.KeyClass, "IX_SSubjects_KeyClassInclude");
+
+            entity.HasIndex(e => e.KeySub, "IX_SSubjects_KeySubInclude").IsUnique();
+
+            entity.HasIndex(e => e.KeySubMaster, "IX_SSubjects_KeySubMaster");
+
+            entity.HasIndex(e => new { e.KeySubMaster, e.Flags, e.KeySub, e.Code }, "IX_SSubjects_KeySubMaster_Flags_KeySub_Code").IsUnique();
+
+            entity.HasIndex(e => new { e.KeySubMaster, e.KeySub, e.Flags }, "IX_SSubjects_KeySubMaster_KeySub_Flags_IncNameCode").IsUnique();
+
+            entity.HasIndex(e => new { e.KeySubMaster, e.PDel }, "IX_SSubjects_KeySubMaster_PDel");
+
+            entity.HasIndex(e => new { e.KeySub, e.Name }, "IX_SSubjects_KeySub_Name_IncNameK");
+
+            entity.HasIndex(e => new { e.KeyClass, e.Code }, "IX_S_Subjects").HasFillFactor(80);
+
+            entity.HasIndex(e => new { e.KeyClass, e.NameK }, "IX_S_Subjects_1").HasFillFactor(80);
+
+            entity.HasIndex(e => e.Name, "IX_S_Subjects_2");
+
+            entity.HasIndex(e => e.NameK, "IX_S_Subjects_3");
+
+            entity.HasIndex(e => e.KeySubActual, "IX_S_Subjects_4");
+
+            entity.HasIndex(e => new { e.KeySubMaster, e.KeySub, e.Flags }, "IX_S_Subjects_KeySubMaster_KeySub_Flags").IsUnique();
+
+            entity.HasIndex(e => e.Name, "IX_S_Subjects_NameInclude");
+
+            entity.HasIndex(e => new { e.KeySub, e.Date }, "IX_Subjects_Date").IsUnique();
+
+            entity.HasIndex(e => new { e.KeySubMaster, e.KeySub, e.KeySubActual, e.Name }, "Idx_SSubjects_KSM_KS_KSA_N").IsUnique();
+
+            entity.HasIndex(e => new { e.KeySubMaster, e.KeySub, e.Date }, "Idx_SSubjects_KeySubMast_KeySub_Date_IncNameK").IsUnique();
+
+            entity.HasIndex(e => new { e.KeySub, e.KeySubMaster, e.Date }, "Idx_SSubjects_KeySub_KeySubMast_Date_IncNameK").IsUnique();
+
+            entity.HasIndex(e => e.KeySub, "_dta_index_S_Subjects_17_959915087__K1_7_11").IsUnique();
+
+            entity.HasIndex(e => new { e.KeySub, e.Name }, "_dta_index_S_Subjects_21_959915087__K1_12").IsUnique();
+
+            entity.HasIndex(e => new { e.KeySubMaster, e.Name }, "_dta_index_S_Subjects_5_250952466__K2_K6_8");
+
+            entity.HasIndex(e => e.KeySub, "_dta_index_S_Subjects_5_959915087__K1_11_16_17").IsUnique();
+
+            entity.HasIndex(e => new { e.KeySub, e.Code }, "_dta_index_S_Subjects_5_959915087__K1_K8_7_11_12_16_17").IsUnique();
+
+            entity.HasIndex(e => new { e.KeyClass, e.Flags, e.KeySubActual, e.KeySubMaster, e.KeySub, e.NameActual }, "idx_SSubjects_KeyCkass_Flags_KeySubAc_KeySubMas_KeySub_NameAc_CodeAc").IsUnique();
+
+            entity.HasIndex(e => new { e.KeyClass, e.KeySub, e.Flags }, "idx_SSubjects_KeyCladd_KeySub_Flags_IncName").IsUnique();
+
+            entity.HasIndex(e => new { e.KeyClass, e.Flags, e.KeySubActual }, "idx_SSubjects_KeyClass_Flags_KeySubActual");
+
+            entity.HasIndex(e => new { e.KeySub, e.KeySubActual }, "idx_SSubjects_KeySubKeySuba_IncNameSNameASHortNameCOdeA").IsUnique();
+
+            entity.Property(e => e.KeySub).HasColumnName("Key_Sub");
+            entity.Property(e => e.AsContragentView)
+                .HasMaxLength(4000)
+                .HasComment("Если задано, вместо сбора представления из формализованной инфы используется это");
+            entity.Property(e => e.CodSub)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasComputedColumnSql("([Code])", false)
+                .HasColumnName("Cod_Sub");
+            entity.Property(e => e.Code)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasDefaultValue("")
+                .HasComment("Код");
+            entity.Property(e => e.CodeActual)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.Comment).HasMaxLength(250);
+            entity.Property(e => e.Date)
+                .HasDefaultValueSql("(getdate())")
+                .HasComment("Дата начала актуальности версии")
+                .HasColumnType("datetime");
+            entity.Property(e => e.DateCreate)
+                .HasDefaultValueSql("(getdate())")
+                .HasComment("Дата создания записи")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Flags).HasComment("Deleted");
+            entity.Property(e => e.KeyClass)
+                .HasComment("Класс")
+                .HasColumnName("Key_Class");
+            entity.Property(e => e.KeySubActual).HasColumnName("Key_SubActual");
+            entity.Property(e => e.KeySubMaster)
+                .HasComment("Группа")
+                .HasColumnName("Key_Sub_Master");
+            entity.Property(e => e.Name)
+                .HasMaxLength(500)
+                .IsUnicode(false);
+            entity.Property(e => e.NameActual)
+                .HasMaxLength(500)
+                .IsUnicode(false);
+            entity.Property(e => e.NameK)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("Name_K");
+            entity.Property(e => e.PDel)
+                .HasComment("ИЗБАВИТЬСЯ...Логическое удаление")
+                .HasColumnName("P_Del");
+            entity.Property(e => e.ShortNameActual)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.View)
+                .HasMaxLength(500)
+                .IsUnicode(false)
+                .HasComputedColumnSql("([dbo].[S_MasterView]([Key_Sub_Master]))", false)
+                .HasComment("Универсальное полное представление записи для использования в метаданных");
+
+            entity.HasOne(d => d.KeySubActualNavigation).WithMany(p => p.InverseKeySubActualNavigation)
+                .HasForeignKey(d => d.KeySubActual)
+                .HasConstraintName("SSubjects_KeySubActual");
+
+            entity.HasOne(d => d.KeySubMasterNavigation).WithMany(p => p.InverseKeySubMasterNavigation)
+                .HasForeignKey(d => d.KeySubMaster)
+                .HasConstraintName("Subjects_KeySubMaster");
+        });
+
         OnModelCreatingPartial(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-
-
 }
