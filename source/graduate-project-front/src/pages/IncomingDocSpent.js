@@ -42,7 +42,7 @@ function IncomingDocSpent(){
     }, [pageNumber, pageSize]);
 
     return (
-        <div className="centered-content" style={{width:"70%"}} >
+        <div className="centered-content ml-4" style={{width:"70%"}} >
             <div className='mt-5'>
                  <NavLink to="../IncomingDocWork" className="nav-button" activeClassName="active-button">В работе</NavLink>
                  <NavLink to="../IncomingDocSpent" className="nav-button" activeClassName="active-button">Отработанные</NavLink>

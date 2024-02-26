@@ -17,7 +17,7 @@ namespace GraduateProjectAPI.Controllers
             _documentService = documents;
         }
         [HttpGet]
-        public async Task<IActionResult> GetDocuments(/*int page, int pageSize, */int resultModel,  int userId = 23546, string expression= "oldnavigatorhidenotinorder")
+        public async Task<IActionResult> GetDocuments(int resultModel,  int userId = 23546, string expression= "oldnavigatorhidenotinorder")
         {
             var result = await _documentService.GetIncomingWorkDocuments(userId, resultModel, expression); ;
             return Ok(result);

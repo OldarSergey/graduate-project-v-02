@@ -52,7 +52,7 @@ function OutgoingDocWork() {
     }, [nameProcedure, pageNumber, pageSize]);
 
     return (
-        <div className="centered-content" style={{width:"70%"}}>
+        <div className="centered-content  ml-4" style={{width:"70%"}}>
              <div style={{width:"70%"}}>
                 <div className="my-4">
                     <div className="rounded-lg overflow-hidden shadow-lg">
