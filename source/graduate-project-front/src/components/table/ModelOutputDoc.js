@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 import Table from './Table';
+
 function ModelOutputDoc({ documents, onDocumentClick }) {
+
     const columns = useMemo(
         () => [
             {
@@ -31,7 +33,7 @@ function ModelOutputDoc({ documents, onDocumentClick }) {
         []
     );
 
-    return <Table columns={columns} data={documents} onDocumentClick={(documentId)=>onDocumentClick(documentId)} />;
+    return <Table columns={columns} data={documents} onDocumentClick={(documentId)=>onDocumentClick(documentId)} ></Table>;
 }
 
 export default ModelOutputDoc;

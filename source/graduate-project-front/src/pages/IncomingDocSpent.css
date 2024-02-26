@@ -1,0 +1,21 @@
+/* Ваши стили CSS */
+.nav-button {
+    text-decoration: none; /* Убираем подчеркивание */
+    background-color: #f0f0f0; /* Цвет фона кнопки */
+    border: none; /* Убираем границу кнопки */
+    color: #333; /* Цвет текста */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    cursor: pointer; /* Курсор при наведении */
+    transition: background-color 0.3s, color 0.3s; /* Плавный переход цвета */
+    margin-right: 20px; /* Пространство между кнопками */
+}
+
+.nav-button:hover {
+    background-color: #e0e0e0; /* Изменение цвета фона при наведении */
+    color: #666; /* Изменение цвета текста при наведении */
+}
+
+.active-button {
+    background-color: blue; /* Цвет активной кнопки */
+    color: white; /* Цвет текста активной кнопки */
+}

@@ -27,7 +27,7 @@ namespace GraduateProjectAPI.Service
             _context = context;
         }
 
-        public async Task<List<DocumentDto>> GetWorkDocuments(int userId, int resultModel, string expression)
+        public async Task<List<DocumentDto>> GetIncomingWorkDocuments(int userId, int resultModel, string expression)
         {
             var documents = new List<DocumentDto>();
 
@@ -167,13 +167,13 @@ namespace GraduateProjectAPI.Service
 
         }
 
-        public async Task<List<DocumentDto>> GetOutgoingDocumentsWork(int pageNumber, int pageSize, int userId)
+        public async Task<List<DocumentDto>> GetOutgoingDocumentsWork(string nameProcedure, int pageNumber, int pageSize, int userId)
         {
             var documents = new List<DocumentDto>();
 
             using (var connection = new SqlConnection(_connectionString))
             {
-                using (var command = new SqlCommand("Doc_OutgoingWork", connection))
+                using (var command = new SqlCommand(nameProcedure, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@PageNumber", pageNumber);
@@ -204,9 +204,5 @@ namespace GraduateProjectAPI.Service
             return documents;
         }
 
-        //public Task<List<DocumentDto>> GetIncomingSpentDocuments(int userId)
-        //{
-
-        //}
     }
 }

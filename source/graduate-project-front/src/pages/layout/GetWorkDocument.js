@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ModelOutputDoc from '../components/table/ModelOutputDoc';
-import GetListInstancesDoc from '../components/GetInstances/GetListInstancesDoc'
+import ModelOutputDoc from '../../components/table/ModelOutputDoc';
+import GetListInstancesDoc from '../../components/GetInstances/GetListInstancesDoc'
 import './GetWorkDocument.css'
 function GetWorkDocument({resultModel}) {
     const [documents, setDocuments] = useState([]);

@@ -19,13 +19,13 @@ namespace GraduateProjectAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetDocuments(/*int page, int pageSize, */int resultModel,  int userId = 23546, string expression= "oldnavigatorhidenotinorder")
         {
-            var result = await _documentService.GetWorkDocuments(userId, resultModel, expression); ;
+            var result = await _documentService.GetIncomingWorkDocuments(userId, resultModel, expression); ;
             return Ok(result);
         }
-        [HttpGet("{pageNumber}/{pageSize}")]
-        public async Task<IActionResult> GetOutgoingDocumentsWork(int pageNumber, int pageSize, int userId = 23546)
+        [HttpGet("{nameProcedur}/{pageNumber}/{pageSize}")]
+        public async Task<IActionResult> GetOutgoingDocumentsWork(string nameProcedur, int pageNumber, int pageSize, int userId = 23546)
         {
-            var result = await _documentService.GetOutgoingDocumentsWork(pageNumber, pageSize, userId); 
+            var result = await _documentService.GetOutgoingDocumentsWork(nameProcedur, pageNumber, pageSize, userId); 
             return Ok(result);
         }
 

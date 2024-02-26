@@ -26,9 +26,6 @@ const LeftPanel = ({ open, setOpen, submenuOpen, setSubmenuOpen }) => {
 
         <ToggleButton open={open} setOpen={setOpen} />
 
-        <Logo open={open} />
-
-        <Search open={open} />
 
         <MenusList open={open} Menus={Menus} setSubmenuOpen={setSubmenuOpen} submenuOpen={submenuOpen} />
         
