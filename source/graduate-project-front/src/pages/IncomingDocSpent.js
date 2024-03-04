@@ -1,65 +1,80 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import ModelOutputDoc from '../components/table/ModelOutputDoc';
 import GetListInstancesDoc from '../components/GetInstances/GetListInstancesDoc';
-import "./IncomingDocWork.css"
 import { NavLink } from 'react-router-dom';
-import "./IncomingDocSpent.css"
 
-function IncomingDocSpent(){ 
+function IncomingDocSpent() {
     const [documents, setDocuments] = useState([]);
-    const [documentId, setDocumentId] = useState();
+    const [loading, setLoading] = useState(false);
+    const [hasMore, setHasMore] = useState(true);
     const [pageNumber, setPageNumber] = useState(1);
-    const [pageSize, setPageSize] = useState(25);
+        const [documentId, setDocumentId] = useState();
+    const pageSize = 25;
+
+    const containerRef = useRef(null);
 
     const handleDocumentClick = (id) => {
         setDocumentId(id);
     };
-    const handlePrevPage = () => {
-        if (pageNumber > 1) {
-            setPageNumber(pageNumber - 1);
-        }
-    };
 
-    const handleNextPage = () => {
-        setPageNumber(pageNumber + 1);
-    };
-
-    const handlePageChange = (newPage) => {
-        setPageNumber(newPage);
-    };
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             try {
                 const response = await axios.get(`https://localhost:7252/api/Document/Doc_IncomingSpent/${pageNumber}/${pageSize}`);
-                setDocuments(response.data);
+                if (response.data.length === 0) {
+                    setHasMore(false); // Все данные загружены
+                } else {
+                    setDocuments(prevDocuments => [...prevDocuments, ...response.data]);
+                }
             } catch (error) {
                 console.error('Error fetching documents:', error);
             }
+            setLoading(false);
         };
 
         fetchData();
     }, [pageNumber, pageSize]);
 
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
+    
+        const handleScroll = () => {
+            const { scrollTop, clientHeight, scrollHeight } = container;
+            if (scrollTop + clientHeight >= scrollHeight - 80 && !loading && hasMore) {
+                setPageNumber(pageNumber => pageNumber + 1);
+            }
+        };
+    
+        container.addEventListener('scroll', handleScroll);
+        return () => container.removeEventListener('scroll', handleScroll);
+    }, [loading, hasMore]); 
+
     return (
-        <div className="centered-content ml-4" style={{width:"70%"}} >
+        <div className="centered-content ml-4" style={{ width: "70%" }}>
             <div className='mt-5'>
-                 <NavLink to="../IncomingDocWork" className="nav-button" activeClassName="active-button">В работе</NavLink>
-                 <NavLink to="../IncomingDocSpent" className="nav-button" activeClassName="active-button">Отработанные</NavLink>
+                <NavLink to="../IncomingDocWork" className="nav-button blue-button" activeClassName="active-button">В работе</NavLink>
+                <NavLink to="../IncomingDocSpent" className="nav-button blue-button" activeClassName="active-button">Отработанные</NavLink>
             </div>
-            <div style={{width:"70%"}}>
-                <div className="my-4">
-                    <div className="overflow-hidden shadow-lg">
+            <div>
+                <div className="my-4" ref={containerRef} style={{ width: "70%", overflowY: 'auto', height: '50vh' }}>
+                    <div className=" shadow-lg">
                         <ModelOutputDoc documents={documents} onDocumentClick={handleDocumentClick} />
                     </div>
-                </div> 
-                <div className="my-4">
-                    <div className="overflow-hidden shadow-lg">
-                        <GetListInstancesDoc documentId={documentId}></GetListInstancesDoc>
-                    </div>
+                    
                 </div>
+                
             </div>
+            <div className="my-4 mt-5" style={{ width: "100%", overflowY: 'auto', height: '40vh' }}>
+                        <div className="rounded-lg">
+                            <GetListInstancesDoc documentId={documentId}></GetListInstancesDoc>
+                        </div>
+            </div>
+            
         </div>
     );
 }
+
 export default IncomingDocSpent;

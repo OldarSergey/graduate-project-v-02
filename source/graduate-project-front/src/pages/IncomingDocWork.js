@@ -31,17 +31,18 @@ function IncomingDocWork(){
     return (
         <div className="centered-content  ml-4" style={{width:"70%"}} >
             <div className='mt-5'>
-                 <NavLink to="../IncomingDocWork" className="nav-button" activeClassName="active-button">В работе</NavLink>
-                 <NavLink to="../IncomingDocSpent" className="nav-button" activeClassName="active-button">Отработанные</NavLink>
+            <NavLink to="../IncomingDocWork" className="nav-button blue-button" activeClassName="active-button">В работе</NavLink>
+            <NavLink to="../IncomingDocSpent" className="nav-button blue-button" activeClassName="active-button">Отработанные</NavLink>
+
             </div>
-           <div style={{width:"70%"}}>
-                <div className="my-4">
-                        <div className="rounded-lg overflow-hidden shadow-lg">
+           <div >
+                <div className="my-4 mt-5" style={{ width: "70%", overflowY: 'auto', height: '50vh' }}>
+                        <div className="rounded-lg shadow-lg">
                             <ModelOutputDoc documents={documents} onDocumentClick={handleDocumentClick}/>
                         </div>
                 </div>
-                <div className="my-4">
-                        <div className="rounded-lg overflow-hidden shadow-lg">
+                <div className="my-4 mt-2" style={{ width: "100%", overflowY: 'auto', height: '40vh' }}>
+                        <div className="rounded-lg">
                             <GetListInstancesDoc documentId={documentId}></GetListInstancesDoc>
                         </div>
                 </div>

@@ -204,5 +204,79 @@ namespace GraduateProjectAPI.Service
             return documents;
         }
 
+        public async Task<List<ArchiveDto>> GetListArchive(int year)
+        {
+            int dnfDirectCreation = 1;
+
+            var result = _context.DocLists
+                 .Where(d => d.Date.Year == year)
+                 .GroupBy(d => d.KeyNote)
+                 .Select(g => new
+                 {
+                     Key_Note = g.Key,
+                     DocumentCount = g.Count()
+                 })
+                 .Join(_context.DocNotes,
+                       nd => nd.Key_Note,
+                       dn => dn.KeyNote,
+                       (nd, dn) => new
+                       {
+                           dn.KeyNote,
+                           dn.Name,
+                           dn.Flags,
+                           nd.DocumentCount
+                       })
+                 .Where(r => r.DocumentCount > 0)
+                 .OrderBy(r => r.Name);
+
+            var resultDto = result.Select(ar => new ArchiveDto
+            {
+                KeyNote = ar.KeyNote,
+                Name = ar.Name,
+                Flags = ar.Flags,
+                DocumentCount = ar.DocumentCount
+            })
+            .ToList();
+            return resultDto;
+        }
+
+        public async Task<List<DocumentDto>> GetListDocumentKeyNoteArchive(int keyNote, int year, int pageNumber, int pageSize, int userId)
+        {
+            var documents = new List<DocumentDto>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                using (var command = new SqlCommand("Doc_GetListArchive", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@KeyNote", keyNote);
+                    command.Parameters.AddWithValue("@KeySubMaster", userId);
+                    command.Parameters.AddWithValue("@Year", year);
+                    command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                    command.Parameters.AddWithValue("@PageSize", pageSize);
+
+                    await connection.OpenAsync();
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (reader.Read())
+                        {
+                            var document = new DocumentDto
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Key_Doc")),
+                                RegistrationNumber = reader.GetString(reader.GetOrdinal("RegNum_Doc")),
+                                Date = reader.IsDBNull(reader.GetOrdinal("date")) ? DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("date")),
+                                Created = reader.GetString(reader.GetOrdinal("Users")),
+                                PublicComment = reader.IsDBNull(reader.GetOrdinal("comment")) ? null : reader.GetString(reader.GetOrdinal("comment")),
+                                TypeDoc = reader.IsDBNull(reader.GetOrdinal("Note")) ? null : reader.GetString(reader.GetOrdinal("Note")),
+                                PrivateComment = reader.IsDBNull(reader.GetOrdinal("UserComment")) ? null : reader.GetString(reader.GetOrdinal("UserComment")),
+                            };
+                            documents.Add(document);
+                        }
+                    }
+                }
+            }
+            return documents;
+        }
     }
 }

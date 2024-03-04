@@ -1,10 +1,11 @@
 import React from 'react';
+import "../table/Table.css"
 
 function TableInstancesDoc({ instancesDoc }) {
     return (
-        <div className="mt-10" style={{ maxHeight: '400px', overflow: 'auto' }}>
+        <div className="mt-10" style={{ maxHeight: '400px'}}>
             <table className="doc-table">
-                <thead>
+                <thead className='sticky-header'>
                     <tr>
                         <th>Указал действие</th>
                         <th>Исполнитель действия</th>

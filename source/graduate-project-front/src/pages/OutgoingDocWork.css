@@ -10,12 +10,29 @@
 
 .doc-table th,
 .doc-table td {
-    border: 1px solid #dddddd;
+    border: 1px solid #babdbd;
     padding: 8px;
     text-align: center;
 }
 
-.doc-table th {
-    background-color: #f2f2f2;
+.doc-table th { 
+    background-color: #a7dff0;
   
 }
+.nav-button:hover {
+    background-color: #20a5e2; /* Изменение цвета фона при наведении */
+    color: white;/* Изменение цвета текста при наведении */
+}
+
+.active-button {
+
+    border-radius: 5%;
+}
+.blue-button {
+    background-color: rgb(25, 126, 221);
+    color: white;
+    border-radius: 15%;
+}
+
+
+   

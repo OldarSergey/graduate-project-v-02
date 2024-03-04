@@ -11,11 +11,16 @@
 }
 
 .nav-button:hover {
-    background-color: #e0e0e0; /* Изменение цвета фона при наведении */
-    color: #666; /* Изменение цвета текста при наведении */
+    background-color: #20a5e2; /* Изменение цвета фона при наведении */
+    color: white;/* Изменение цвета текста при наведении */
 }
 
 .active-button {
-    background-color: blue; /* Цвет активной кнопки */
     color: white; /* Цвет текста активной кнопки */
+    border-radius: 5%;
 }
+.blue-button {
+    background-color: rgb(25, 126, 221);
+    color: white;
+    border-radius: 15%;
+  }
