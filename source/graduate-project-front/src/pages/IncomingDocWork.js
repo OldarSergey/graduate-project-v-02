@@ -29,7 +29,7 @@ function IncomingDocWork(){
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:9982/api/Document?resultModel=1');
+                const response = await axios.get('http://176.106.132.3:9982/api/Document?resultModel=1');
                 setDocuments(response.data);
             } catch (error) {
                 console.error('Error fetching documents:', error);
