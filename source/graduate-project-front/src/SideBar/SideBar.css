@@ -1,0 +1,38 @@
+.sidebar-container {
+    position: relative;
+    height: 100vh;
+  }
+  
+  .sidebar-toggle {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 15px;
+    z-index: 9999;
+    cursor: pointer;
+  }
+  
+  
+  .toggle-icon {
+    font-size: 30px;
+  }
+  
+  .sidebar-toggle.collapsed .toggle-icon {
+    color: #000; /* измените цвет на необходимый */
+  }
+  .white-icon {
+    color: #ffffff; /* белый цвет */
+  }
+  @media (min-width: 1040px) {
+    .custom-sidebar {
+      width: 180px; /* задаем фиксированную ширину на планшетах и на более крупных устройствах */
+    }
+    
+    .sidebar-toggle {
+      display: none; /* скрываем кнопку бургера на планшетах и на более крупных устройствах */
+    }
+  }
+  @media (max-width: 1040px) {
+    .sidebar-container{
+      position: absolute;
+    }
+  }

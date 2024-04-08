@@ -1,0 +1,156 @@
+.model-table-custom {
+    padding: 4px; 
+	box-shadow: 0px 0px 15px rgb(0, 0, 0);
+
+}
+.btn-visible{
+    display: none;
+}
+.btn-custom {
+   display: none;
+    width: 150px;
+    height: 70px;
+    background: #0464B4;
+    color: #FFFFFF;
+    border-color: #0464B4;
+    border-width: 1px;
+    border-style: solid;
+    font-family: "Source Sans 3";
+    font-weight: 400;
+    font-size: 18px;
+    text-align: center;
+    
+}
+
+
+.table thead th {
+    background-color: #0464B4; /* Цвет фона шапки таблицы */
+    color: #FFFFFF; 
+    text-align: center;
+    vertical-align: middle;
+    font-size: 18px;
+    line-height: 1.3;
+    font-weight: 400;
+    width: auto;
+	height: 70px;
+    position: sticky; 
+    top: 0px;
+    outline: 0.9px solid #0a0a0a;
+    border: 1.5px solid rgb(17, 0, 255);
+    overflow-x: hidden;
+}
+
+
+.button-reset {
+    /* Сброс всех стилей */
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    overflow: visible;
+    padding: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+  }
+
+.table-wrapper {
+    margin: 4;
+    max-height: 38vh;
+    overflow-Y: auto; /* Добавлено для вертикального скролла */
+    overflow-x: hidden /* Убрано горизонтальное прокручивание */
+
+}
+
+
+.outer-wrapper {
+    margin-right: 20px;
+    border-radius: 4px;
+    max-width: fit-content;
+    max-height: fit-content;
+}
+
+/* Стили для скроллбара */
+.table-wrapper::-webkit-scrollbar {
+    width: 10px; /* Ширина скроллбара */
+    display: none;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.table-responsive{
+    width: 100%;
+    height: 100%;
+}
+
+
+@media (max-width: 455px) {
+    .table-wrapper table thead {
+        display: none;
+    }
+    .table-wrapper table tbody tr {
+        display: block;
+        margin-bottom: 20px; /* Отступ между карточками */
+        padding: 15px; /* Внутренний отступ внутри карточки */
+        background-color: #FFFFFF; /* Карточки в белый цвет */
+        border: 2px solid #ddd; /* Добавляем границу для карточек */
+        border-radius: 8px; /* Скругляем углы карточек */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Добавляем тень для эффекта поднятия */
+        width: 40vh; /* Ширина карточки на мобильных устройствах */
+    }
+    .button-reset{
+        display: none;  /* Делаем невидимыми нашу иконку со свойством*/
+    }
+    .table-wrapper table tbody td {
+        display: flex; /* Используем flex для выравнивания содержимого по горизонтали */
+        justify-content: space-between; /* Выравниваем текст справа */
+        align-items: center; /* Выравниваем текст по вертикали */
+        font-size: 5vw; /* Размер шрифта зависит от ширины видимой области */
+        border-bottom: 1px solid #ddd; /* Добавляем бордер снизу */
+        padding-bottom: 10px; /* Отступ снизу для бордера */
+    }
+    .model-table-custom{
+        box-shadow: none; 
+        border: none;
+    }
+    .btn-custom{
+        display:block    /* Делаем видимыми наши кнопки*/
+    }
+    .table-wrapper table tbody td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 20px; /* Отступ между заголовком и содержимым карточки */
+    }
+    .table-wrapper {
+        min-width: 100%;
+        height: 1050px;
+        min-height: 87vh;
+        background-color: transparent; /* Убираем фон */
+    }
+    .delivery{
+        background-color: transparent; /* Убираем фон */
+    }
+    .table-wrapper table tr {
+        width: 300px;
+        display: block;
+    }
+    .table-wrapper table {
+        background-color: transparent; /* Прозрачный фон для таблицы */
+    }
+}
+
+
+
+

@@ -1,25 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import ModelOutputDoc from '../components/table/ModelOutputDoc';
-import GetListInstancesDoc from '../components/GetInstances/GetListInstancesDoc';
+import { Container, Row, Col } from 'react-bootstrap';
 import "./IncomingDocWork.css"
+import { BiSearch } from 'react-icons/bi';
+import ModelTable from '../components/table/ModelTable';
+import { Dropdown } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-
+import axios from 'axios';
+import GetListInstancesDoc from '../components/GetInstance/GetListInstancesDoc';
 function IncomingDocWork(){ 
+    const [selectedItem, setSelectedItem] = useState('Фильтр'); 
     const [documents, setDocuments] = useState([]);
     const [documentId, setDocumentId] = useState();
-    const [nameProcedure, setNameProcedure] = useState("Doc_Documents")
+    const [searchDocument, setSearchDocument] = useState("");
 
 
-    
     const handleDocumentClick = (id) => {
         setDocumentId(id);
     };
+    
+    const handleSelect = (eventKey) => {
+        setSelectedItem(eventKey); 
+    };
+
+    const filteredDocuments = documents.filter(document => {
+        return document.created.toLowerCase().includes(searchDocument.toLowerCase())
+    })
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://176.106.132.3:9982/api/Document?resultModel=${1}`);
+                const response = await axios.get('http://localhost:9982/api/Document?resultModel=1');
                 setDocuments(response.data);
             } catch (error) {
                 console.error('Error fetching documents:', error);
@@ -28,26 +38,54 @@ function IncomingDocWork(){
         fetchData();
     }, []); 
 
+    
     return (
-        <div className="centered-content  ml-4" style={{width:"70%"}} >
-            <div className='mt-5'>
-            <NavLink to="../IncomingDocWork" className="nav-button blue-button" activeClassName="active-button">В работе</NavLink>
-            <NavLink to="../IncomingDocSpent" className="nav-button blue-button" activeClassName="active-button">Отработанные</NavLink>
+        <Container fluid className='p-0' style={{ overflowY: 'auto', maxHeight: '100vh' }}> {/* Добавляем стили для прокрутки */}
+            <Row className='row-1 m-0 w-100'>
+                <Col className="col-auto search-container ">
+                    <BiSearch className="search-icon" />
+                    <input 
+                    className='inputSearch' 
+                    placeholder="Поиск..."
+                    onChange={(event) => setSearchDocument(event.target.value)}></input>
+                </Col>
 
-            </div>
-           <div >
-                <div className="my-4 mt-5" style={{ width: "70%", overflowY: 'auto', height: '50vh' }}>
-                        <div className="rounded-lg shadow-lg">
-                            <ModelOutputDoc documents={documents} onDocumentClick={handleDocumentClick}/>
-                        </div>
-                </div>
-                <div className="my-4 mt-2" style={{ width: "100%", overflowY: 'auto', height: '40vh' }}>
-                        <div className="rounded-lg">
-                            <GetListInstancesDoc documentId={documentId}></GetListInstancesDoc>
-                        </div>
-                </div>
-            </div>
-        </div>
-    );
+                <Col className="d-flex align-items-start">
+                    <NavLink to="/IncomingDocWork" className='nav-button btnCustom' activeClassName="active-button">
+                        В работе
+                    </NavLink>
+                    <NavLink to="/IncomingDocSpent" className='nav-button btnCustom ms-2' activeClassName="active-button">
+                        Отработанные
+                    </NavLink>
+                    <Dropdown onSelect={handleSelect} className='visiable-dropdown'>
+                        <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                            {selectedItem}
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <NavLink to="/IncomingDocWork" className="dropdown-item" activeClassName="active" onClick={() => setSelectedItem("В работе")}>
+                                В работе
+                            </NavLink>
+                            <NavLink to="/IncomingDocSpent" className="dropdown-item" activeClassName="active" onClick={() => setSelectedItem("Отработанные")}>
+                                Отработанные
+                            </NavLink>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </Col>
+            </Row>
+            <Row className='w-100' >
+                <Col className="d-flex flex-column w-100 h-100">
+                        <Col>
+                            <ModelTable documents={filteredDocuments}  onDocumentClick={handleDocumentClick}></ModelTable>
+                        </Col>
+                </Col>
+            </Row>
+            <Row className='w-100 inst-visiable'>
+                <Col className='inst-visiable'>
+                     <GetListInstancesDoc documentId={documentId}></GetListInstancesDoc>
+                </Col>
+            </Row>
+        </Container>
+    )
 }
 export default IncomingDocWork;
