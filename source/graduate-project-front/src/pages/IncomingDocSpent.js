@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import ModelTable from '../components/table/ModelTable';
 import { Dropdown } from 'react-bootstrap';
 import GetListInstancesDoc from '../components/GetInstance/GetListInstancesDoc';
+import ModalWindowInstanceDoc from '../components/ModalWindow/ModalWindowInstanceDoc';
 
 function IncomingDocSpent() {
     const [documents, setDocuments] = useState([]);
@@ -15,6 +16,7 @@ function IncomingDocSpent() {
     const [documentId, setDocumentId] = useState();
     const [searchDocument, setSearchDocument] = useState("");
     const [selectedItem, setSelectedItem] = useState('Фильтр'); 
+    const [isOpenModal, setIsOpenModal] = useState(false); // Состояние открытости модального окна
 
     const pageSize = 25;
 
@@ -22,6 +24,15 @@ function IncomingDocSpent() {
 
     const handleDocumentClick = (id) => {
         setDocumentId(id);
+        if (window.innerWidth <= 1100 && window.innerHeight < window.innerWidth) {
+            setIsOpenModal(true); // Открыть модальное окно при клике на документ
+        }
+    };
+
+
+    const closeModal = () => {
+        setIsOpenModal(false); 
+        setDocumentId(null); 
     };
 
     const handleSelect = (eventKey) => {
@@ -37,7 +48,7 @@ function IncomingDocSpent() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`http://176.106.132.3:9982/api/Document/Doc_IncomingSpent/${pageNumber}/${pageSize}`);
+                const response = await axios.get(`http://localhost:5254/api/Document/Doc_IncomingSpent/${pageNumber}/${pageSize}`);
                 if (response.data.length === 0) {
                     setHasMore(false); // Все данные загружены
                 } else {
@@ -102,8 +113,9 @@ function IncomingDocSpent() {
             </Row>
             <Row className='w-100' >
                 <Col className="d-flex flex-column w-100 h-100">
-                        <Col >
-                            <ModelTable ref={containerRef} documents={filteredDocuments}  onDocumentClick={handleDocumentClick}></ModelTable>
+                        <Col>
+                            <ModelTable documents={filteredDocuments}  onDocumentClick={handleDocumentClick}></ModelTable>
+                            <ModalWindowInstanceDoc isOpen={isOpenModal} onClose={closeModal} documentId={documentId}></ModalWindowInstanceDoc>
                         </Col>
                 </Col>
             </Row>

@@ -22,14 +22,16 @@ function GetListInstancesDoc({ documentId }) {
     
     return (
         <>
-           {(instancesDoc !== null && instancesDoc.length !== 0) ? (
-                <TableInstanceDoc instancesDoc={instancesDoc} />
-            ) : (
-                <p className="text-error ms-5">Документ с ключем {documentId} не имеет своего маршрута инстанций!</p>
-            )}
-
+           {instancesDoc !== null ? (
+                instancesDoc.length !== 0 ? (
+                    <TableInstanceDoc instancesDoc={instancesDoc} />
+                ) : (
+                    <p className="text-error ms-5">Документ с ключем {documentId} не имеет своего маршрута инстанций!</p>
+                )
+            ) : null}
         </>
     );
 }
+
 
 export default GetListInstancesDoc

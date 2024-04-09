@@ -58,9 +58,6 @@
 .table-wrapper {
     margin: 4;
     max-height: 38vh;
-    overflow-Y: auto; /* Добавлено для вертикального скролла */
-    overflow-x: hidden /* Убрано горизонтальное прокручивание */
-
 }
 
 
@@ -148,6 +145,12 @@
     }
     .table-wrapper table {
         background-color: transparent; /* Прозрачный фон для таблицы */
+    }
+    @media screen and (max-width: 1100px) and (orientation: landscape) {
+        .table-wrapper{
+            min-height: 50vh;
+            max-height: 60vh;
+        }     
     }
 }
 

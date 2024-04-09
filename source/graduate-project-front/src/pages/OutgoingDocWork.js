@@ -6,16 +6,19 @@ import ModelTable from '../components/table/ModelTable';
 import { Dropdown } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import GetListInstancesDoc from '../components/GetInstance/GetListInstancesDoc';
+import ModalWindowInstanceDoc from "../components/ModalWindow/ModalWindowInstanceDoc";
 
 function OutgoingDocWork() {
     const [documents, setDocuments] = useState([]);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [pageNumber, setPageNumber] = useState(1);
+    const [isOpenModal, setIsOpenModal] = useState(false); // Состояние открытости модального окна
     const [documentId, setDocumentId] = useState();
     const [searchDocument, setSearchDocument] = useState("");
     const [selectedItem, setSelectedItem] = useState('Фильтр'); 
     const [nameProcedure, setNameProcedure] = useState("Doc_OutgoingDocumentsWork")
+
 
     const pageSize = 25;
 
@@ -23,6 +26,9 @@ function OutgoingDocWork() {
 
     const handleDocumentClick = (id) => {
         setDocumentId(id);
+        if (window.innerWidth <= 1100 && window.innerHeight < window.innerWidth) {
+            setIsOpenModal(true); // Открыть модальное окно при клике на документ
+        }
     };
 
     const handleSelect = (eventKey) => {
@@ -37,6 +43,10 @@ function OutgoingDocWork() {
         setNameProcedure('Doc_IncomingSpent');
     }
 
+    const closeModal = () => {
+        setIsOpenModal(false); 
+        setDocumentId(null); 
+    };
 
     const filteredDocuments = documents.filter(document => {
         return document.created.toLowerCase().includes(searchDocument.toLowerCase())
@@ -46,7 +56,7 @@ function OutgoingDocWork() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`http://176.106.132.3:9982/api/Document/${nameProcedure}/${pageNumber}/${pageSize}`);
+                const response = await axios.get(`http://localhost:5254/api/Document/${nameProcedure}/${pageNumber}/${pageSize}`);
                 if (response.data.length === 0)  {
                     setHasMore(false); 
                 } else {
@@ -118,11 +128,12 @@ function OutgoingDocWork() {
                 <Col className="d-flex flex-column w-100 h-100">
                         <Col >
                             <ModelTable ref={containerRef} documents={filteredDocuments}  onDocumentClick={handleDocumentClick}></ModelTable>
+                            <ModalWindowInstanceDoc isOpen={isOpenModal} onClose={closeModal} documentId={documentId}></ModalWindowInstanceDoc>
                         </Col>
                 </Col>
             </Row>
-            <Row className='w-100'>
-                <Col>
+            <Row className='w-100 inst-visiable'>
+                <Col className='inst-visiable'>
                      <GetListInstancesDoc documentId={documentId}></GetListInstancesDoc>
                 </Col>
             </Row>

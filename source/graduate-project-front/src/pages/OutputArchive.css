@@ -118,3 +118,8 @@
         height: 50px;
     }
 }
+@media screen and (max-width: 390px) {
+    .btn-custom-archive{
+        width: 100px;
+    }
+}

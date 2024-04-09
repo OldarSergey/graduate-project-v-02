@@ -1,0 +1,15 @@
+.modal-custom {
+    max-width: none !important;
+  }
+.modal-content {
+    max-width: none !important;
+  }
+  .modal{
+    width: 700px!important;
+  }
+  @media screen and (max-width: 1100px) and (orientation: landscape) {
+    .modal-custom .modal-content {
+        width: 90vw !important;
+      }
+      
+  }

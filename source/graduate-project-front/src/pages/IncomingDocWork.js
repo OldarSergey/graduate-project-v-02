@@ -7,20 +7,33 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import GetListInstancesDoc from '../components/GetInstance/GetListInstancesDoc';
-function IncomingDocWork(){ 
+import ModalWindowInstanceDoc from '../components/ModalWindow/ModalWindowInstanceDoc';
+
+
+function IncomingDocWork() {
+    const [isOpenModal, setIsOpenModal] = useState(false); // Состояние открытости модального окна
     const [selectedItem, setSelectedItem] = useState('Фильтр'); 
     const [documents, setDocuments] = useState([]);
     const [documentId, setDocumentId] = useState();
     const [searchDocument, setSearchDocument] = useState("");
 
-
     const handleDocumentClick = (id) => {
         setDocumentId(id);
+        if (window.innerWidth <= 1100 && window.innerHeight < window.innerWidth) {
+            setIsOpenModal(true); // Открыть модальное окно при клике на документ
+        }
     };
+    
     
     const handleSelect = (eventKey) => {
         setSelectedItem(eventKey); 
     };
+
+    const closeModal = () => {
+        setIsOpenModal(false); 
+        setDocumentId(null); 
+    };
+    
 
     const filteredDocuments = documents.filter(document => {
         return document.created.toLowerCase().includes(searchDocument.toLowerCase())
@@ -29,7 +42,7 @@ function IncomingDocWork(){
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://176.106.132.3:9982/api/Document?resultModel=1');
+                const response = await axios.get('http://localhost:5254/api/Document?resultModel=1');
                 setDocuments(response.data);
             } catch (error) {
                 console.error('Error fetching documents:', error);
@@ -77,6 +90,7 @@ function IncomingDocWork(){
                 <Col className="d-flex flex-column w-100 h-100">
                         <Col>
                             <ModelTable documents={filteredDocuments}  onDocumentClick={handleDocumentClick}></ModelTable>
+                            <ModalWindowInstanceDoc isOpen={isOpenModal} onClose={closeModal} documentId={documentId}></ModalWindowInstanceDoc>
                         </Col>
                 </Col>
             </Row>

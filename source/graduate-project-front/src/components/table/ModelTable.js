@@ -31,7 +31,7 @@ const ModelTable = React.forwardRef(({ documents, onDocumentClick }, ref) => {
                             <th>Создатель</th>
                             <th>Комментарий</th>
                             <th>Вид документа</th>
-                            <th>Личный комментарий</th>
+                            <th className='personal-comment'>Личный комментарий</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -44,7 +44,7 @@ const ModelTable = React.forwardRef(({ documents, onDocumentClick }, ref) => {
                                 <td data-label='Создатель'>{document.created}</td>
                                 <td data-label=''>{document.publicComment}</td>
                                 <td data-label=''>{document.typeDoc}</td>
-                                <td data-label='Личный комментарий'>{document.privateComment}</td>
+                                <td className='personal-comment' data-label='Личный комментарий'>{document.privateComment}</td>
                                 <td>
                                     <button className='btn-custom ml-3' style={{ margin: '0', marginRight: '10px' }}>Свойства</button>
                                     <button className='btn-custom ml-4' onClick={() => openModal(document.id)} style={{ margin: '0' }}>Маршрут</button>
