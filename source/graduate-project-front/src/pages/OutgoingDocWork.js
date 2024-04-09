@@ -97,7 +97,7 @@ function OutgoingDocWork() {
 
                 <Col className="d-flex align-items-start">
                     <button  className="btnCustom" activeClassName="active-button" onClick={()=>onChangeNameProcedureOnWork()} style={{padding:'10px'}}>В работе  </button>
-                    <button className="btnCustom" activeClassName="active-button" onClick={()=>onChangeNameProcedureOnSpent()} style={{padding:'10px'}}>Отработанные \\</button>
+                    <button className="btnCustom" activeClassName="active-button" onClick={()=>onChangeNameProcedureOnSpent()} style={{padding:'10px'}}>Отработанные</button>
                     <Dropdown onSelect={handleSelect} className='visiable-dropdown'>
                         <Dropdown.Toggle variant="primary" id="dropdown-basic">
                             {selectedItem}

@@ -54,7 +54,7 @@ function IncomingDocWork(){
                     <NavLink to="/IncomingDocWork" className='nav-button btnCustom' activeClassName="active-button">
                         В работе
                     </NavLink>
-                    <NavLink to="/IncomingDocSpent" className='nav-button btnCustom ms-2' activeClassName="active-button">
+                    <NavLink to="/IncomingDocSpent" className='nav-button btnCustom' activeClassName="active-button">
                         Отработанные
                     </NavLink>
                     <Dropdown onSelect={handleSelect} className='visiable-dropdown'>
@@ -63,10 +63,10 @@ function IncomingDocWork(){
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <NavLink to="/IncomingDocWork" className="dropdown-item" activeClassName="active" onClick={() => setSelectedItem("В работе")}>
+                            <NavLink to="/IncomingDocWork" className="dropdown-item" activeClassName="active"  onClick={() => setSelectedItem("В работе")}>
                                 В работе
                             </NavLink>
-                            <NavLink to="/IncomingDocSpent" className="dropdown-item" activeClassName="active" onClick={() => setSelectedItem("Отработанные")}>
+                            <NavLink to="/IncomingDocSpent" className="dropdown-item"  activeClassName="active" onClick={() => setSelectedItem("Отработанные")}>
                                 Отработанные
                             </NavLink>
                         </Dropdown.Menu>

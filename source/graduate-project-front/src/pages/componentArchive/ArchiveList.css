@@ -1,0 +1,9 @@
+.archive-custom{}
+
+@media screen and (max-width: 1370px) {
+    .archive-custom{
+        max-height: 350px;
+        overflow-y: auto;
+    }
+    
+}

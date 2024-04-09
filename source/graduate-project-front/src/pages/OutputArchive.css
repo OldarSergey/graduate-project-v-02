@@ -1,0 +1,120 @@
+
+.archive-col {
+    max-width:345px;
+    display: block;
+    width: auto;
+}
+
+
+.row-archive-one{
+    margin-left: 5px;
+    margin-top: 15px;
+}
+.row-archive-two{
+    margin-top: 15px;
+    margin-left: 15px;
+    background-color:#0464B4; 
+}
+.row-archive-three {
+    background-color: white;
+    height: 100vh; /* Устанавливаем высоту равной 100% высоты экрана */
+    margin-left: 15px;
+    box-shadow: 0px 0px 50px 10px rgba(0,0,0,0.2);
+}
+.overflow-auto {
+    overflow: auto; /* Добавляем прокрутку при необходимости */
+}
+.text-archive{
+    color: white;
+    font-size:25px;
+    text-align: center;
+}
+.btn-custom-archive {
+    display: none;
+     width: 200px;
+     height: 70px;
+     border-radius: 10px;
+     background: #0464B4;
+     color: #FFFFFF;
+     border-color: #0464B4;
+     border-width: 1px;
+     border-style: solid;
+     font-family: "Source Sans 3";
+     font-weight: 400;
+     font-size: 18px;
+     text-align: center;
+     
+ }
+.select-custom {
+    width: 200px; /* Ограничение ширины */
+    margin-left: 50px;
+    margin-top: 15px;
+    height: 40px;
+    max-height: 80px;
+    overflow-y: scroll;
+    padding: 4px 8px;
+    background: #EBEBEB;
+    color: #232323;
+    border: 1px solid #232323;
+    border-radius: 4px;
+    font-family: "Source Sans 3";
+    font-weight: 400;
+    font-size: 18px;
+    text-align: left;
+}
+
+/* Стилизация скроллбара для Webkit (Chrome, Safari) */
+.row-archive-three::-webkit-scrollbar {
+    width: 10px; /* Ширина скроллбара */
+}
+
+.row-archive-three::-webkit-scrollbar-thumb {
+    background-color: #888; /* Цвет скроллбара */
+    border-radius: 5px; /* Радиус скроллбара */
+}
+
+.row-archive-three::-webkit-scrollbar-track {
+    background-color: #eee; /* Цвет фона трека скроллбара */
+}
+
+/* Стилизация скроллбара для Firefox */
+.row-archive-three::-moz-scrollbar {
+    width: 10px; /* Ширина скроллбара */
+}
+
+.row-archive-three::-moz-scrollbar-thumb {
+    background-color: #888; /* Цвет скроллбара */
+    border-radius: 5px; /* Радиус скроллбара */
+}
+
+.row-archive-three::-moz-scrollbar-track {
+    background-color: #eee; /* Цвет фона трека скроллбара */
+}
+
+/* Стилизация скроллбара для Internet Explorer/Edge */
+.row-archive-three::-ms-scrollbar {
+    width: 10px; /* Ширина скроллбара */
+}
+
+.row-archive-three::-ms-scrollbar-thumb {
+    background-color: #888; /* Цвет скроллбара */
+    border-radius: 5px; /* Радиус скроллбара */
+}
+
+.row-archive-three::-ms-scrollbar-track {
+    background-color: #eee; /* Цвет фона трека скроллбара */
+}
+@media screen and (max-width: 1370px) {
+    .d-none-custom {
+        display: none !important;
+    }
+    .btn-custom-archive{
+        display: block;
+    }
+}
+@media screen and (max-width: 769px) {
+    .btn-custom-archive{
+        width: 150px;
+        height: 50px;
+    }
+}

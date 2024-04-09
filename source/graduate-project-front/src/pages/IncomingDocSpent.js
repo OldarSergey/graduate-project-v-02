@@ -81,7 +81,7 @@ function IncomingDocSpent() {
                     <NavLink to="/IncomingDocWork" className='nav-button btnCustom' >
                         В работе
                     </NavLink>
-                    <NavLink to="/IncomingDocSpent" className='nav-button btnCustom ms-2' >
+                    <NavLink to="/IncomingDocSpent" className='nav-button btnCustom ' >
                         Отработанные
                     </NavLink>
                     <Dropdown onSelect={handleSelect} className='visiable-dropdown'>

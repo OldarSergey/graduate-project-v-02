@@ -5,15 +5,18 @@ import Sidebar from './SideBar/SideBar';
 import './App.css';
 import IncomingDocSpent from './pages/IncomingDocSpent';
 import OutgoingDocWork from './pages/OutgoingDocWork';
+import OutputArchive from './pages/OutputArchive';
 
 function App() {
   return (
     <div  className="flex-container m-0 p-0">
       <Sidebar />
       <Routes>
+      <Route path="/" element={<IncomingDocWork />} />
         <Route path="/IncomingDocWork" element={<IncomingDocWork />} />
         <Route path="/IncomingDocSpent" element={<IncomingDocSpent/>} />
         <Route path="/OutgoingDocWork" element={<OutgoingDocWork />} />
+        <Route path="/OutputArchive" element={<OutputArchive />} />
       </Routes>
     </div>
   );

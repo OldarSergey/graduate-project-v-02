@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./ModelTable.css"
 import { Col, Row } from 'react-bootstrap';
 import ModalWindowInstanceDoc from '../ModalWindow/ModalWindowInstanceDoc';
+import { format } from 'date-fns';
 
 const ModelTable = React.forwardRef(({ documents, onDocumentClick }, ref) => {
 
@@ -39,7 +40,7 @@ const ModelTable = React.forwardRef(({ documents, onDocumentClick }, ref) => {
                         {documents.map((document, index) => (
                             <tr key={index} onClick={() => onDocumentClick(document.id)}>
                                 <td data-label='№'>{document.registrationNumber}</td>
-                                <td data-label='Дата'>{document.date}</td>
+                                <td data-label='Дата'>{format(new Date(document.date), 'dd.MM.yyyy')}</td>
                                 <td data-label='Создатель'>{document.created}</td>
                                 <td data-label=''>{document.publicComment}</td>
                                 <td data-label=''>{document.typeDoc}</td>
