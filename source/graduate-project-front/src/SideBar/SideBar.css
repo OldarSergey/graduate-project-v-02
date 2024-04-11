@@ -11,7 +11,13 @@
     cursor: pointer;
   }
   
-  
+
+  .iXnTOl.toggled{
+    min-width: 1
+  }
+
+
+
   .toggle-icon {
     font-size: 30px;
   }
@@ -22,17 +28,29 @@
   .white-icon {
     color: #ffffff; /* белый цвет */
   }
-  @media (min-width: 1040px) {
-    .custom-sidebar {
-      width: 180px; /* задаем фиксированную ширину на планшетах и на более крупных устройствах */
-    }
-    
-    .sidebar-toggle {
-      display: none; /* скрываем кнопку бургера на планшетах и на более крупных устройствах */
-    }
+ @media (min-width: 1040px) {
+  .custom-sidebar {
+    width: 180px;
   }
-  @media (max-width: 1040px) {
-    .sidebar-container{
-      position: absolute;
-    }
+  
+  .sidebar-toggle {
+    display: none;
   }
+}
+
+@media (max-width: 1040px) {
+  .sidebar-container {
+    position: absolute;
+    width: 100%; /* Используем ширину по умолчанию для боковой панели на мобильных устройствах */
+  }
+}
+@media (max-width: 730px) {
+  .iXnTOl.toggled{
+    min-width: 200px !important;
+  }
+  .item-content {
+    display: block !important; /* Убедитесь, что элемент отображается как блочный */
+    color: white !important; /* Цвет текста */
+  }
+ 
+}

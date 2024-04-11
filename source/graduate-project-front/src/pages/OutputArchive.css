@@ -114,7 +114,7 @@
 }
 @media screen and (max-width: 769px) {
     .btn-custom-archive{
-        width: 150px;
+        width: 100px;
         height: 50px;
     }
 }
