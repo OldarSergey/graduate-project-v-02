@@ -27,7 +27,7 @@ function DocumentArchive({ keyNote, year, search }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:5254/api/Document/archive/${keyNote}/${keyNote}/${pageNumber}/${pageSize}?userId=23546`);
+                const response = await axios.get(`http://176.106.132.3:9982/api/Document/archive/${keyNote}/${keyNote}/${pageNumber}/${pageSize}?userId=23546`);
                 setDocArchive(response.data);
             } catch (error) {
                 console.error('Error fetching documents:', error);
