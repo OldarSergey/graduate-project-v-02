@@ -7,8 +7,8 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import GetListInstancesDoc from '../components/GetInstance/GetListInstancesDoc';
+import ModalWindowGetSizeInstanceDoc from '../components/ModalWindow/ModalWindowGetSizeInstanceDoc';
 import ModalWindowInstanceDoc from '../components/ModalWindow/ModalWindowInstanceDoc';
-
 
 function IncomingDocWork() {
     const [isOpenModal, setIsOpenModal] = useState(false); // Состояние открытости модального окна
@@ -42,7 +42,7 @@ function IncomingDocWork() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://176.106.132.3:9982/api/Document?resultModel=1`);
+                const response = await axios.get(`http://localhost:5254/api/Document?resultModel=1`);
                 setDocuments(response.data);
             } catch (error) {
                 console.error('Error fetching documents:', error);

@@ -7,9 +7,14 @@
   .modal{
     width: 700px!important;
   }
+  
+  .modal-body{
+    margin-top: -605PX !important;
+  }
   @media screen and (max-width: 1100px) and (orientation: landscape) {
     .modal-custom .modal-content {
         width: 90vw !important;
       }
+      
       
   }

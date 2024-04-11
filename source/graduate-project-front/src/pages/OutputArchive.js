@@ -35,7 +35,7 @@ function OutputArchive(){
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://176.106.132.3:9982/api/Document/archive/${selectedYear}`);
+                const response = await axios.get(`http://localhost:5254/api/Document/archive/${selectedYear}`);
                 setArchive(response.data);
             } catch (error) {
                 console.error('Error fetching documents:', error);
@@ -46,7 +46,7 @@ function OutputArchive(){
     }, [selectedYear]);
 
     return (
-        <Container fluid className='p-0'style={{ overflowY: 'auto', maxHeight: '100vh' }}> {/* Добавляем стили для прокрутки */}
+        <Container fluid className='p-0 archive-conteiner'> {/* Добавляем стили для прокрутки */}
         <Row className='row-1 m-0 w-100'>
             <Col className="col-auto search-container" >
                 <BiSearch className="search-icon" />
@@ -61,8 +61,8 @@ function OutputArchive(){
             </Col>
 
         </Row>
-        <Row className='w-100' style={{height:'85vh'}}>
-                <Col className="d-none-custom d-flex flex-column archive-col h-100">
+        <Row className='w-100 row-hight'>
+                <Col className="d-none-custom d-flex flex-column archive-col" style={{height:"82vh"}}>
                     <Row className="row-archive-one">
                         <CustomSelect selectedYear={selectedYear} handleYearChange={handleYearChange} />
                     </Row>
@@ -74,7 +74,7 @@ function OutputArchive(){
                     </Row>
                     
                 </Col>
-                <Col className="w-100">
+                <Col className="w-100" style={{height:"50px"}}>
                     <Row>
                         <DocumentArchive keyNote={keyNote} year={selectedYear} search={searchDocument} />
                     </Row>

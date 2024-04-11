@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 
 const ModelTable = React.forwardRef(({ documents, onDocumentClick }, ref) => {
 
-    const [openDocumentId, setOpenDocumentId] = useState(null);
+    const [openDocumentId, setOpenDocumentId] = useState(true);
 
     const openModal = (documentId) => setOpenDocumentId(documentId);
     const closeModal = () => setOpenDocumentId(null);

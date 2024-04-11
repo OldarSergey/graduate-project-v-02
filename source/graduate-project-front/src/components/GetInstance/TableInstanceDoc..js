@@ -14,7 +14,7 @@ function TableInstanceDoc({ instancesDoc }) {
                             <th>Комментарий исполнителя</th>
                             <th>Начал работу</th>
                             <th>Выполнил работу</th>
-                            <th>Получено в работу</th>
+                            <th className="personal-comment">Получено в работу</th>
 
                         </tr>
                     </thead>
@@ -30,7 +30,7 @@ function TableInstanceDoc({ instancesDoc }) {
                                 </td>
                                 <td data-label='Начал'>{new Date(instance.started).toLocaleDateString()}</td>
                                 <td data-label='Выполнил'>{new Date(instance.executed).toLocaleDateString()}</td>
-                                <td data-label='Получил'>{new Date(instance.received).toLocaleDateString()}</td>
+                                <td className="personal-comment" data-label='Получил'>{new Date(instance.received).toLocaleDateString()}</td>
                             </tr>
                         ))}
                 </tbody>

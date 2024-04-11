@@ -48,7 +48,7 @@ function IncomingDocSpent() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`http://176.106.132.3:9982/api/Document/Doc_IncomingSpent/${pageNumber}/${pageSize}`);
+                const response = await axios.get(`http://localhost:5254/api/Document/Doc_IncomingSpent/${pageNumber}/${pageSize}`);
                 if (response.data.length === 0) {
                     setHasMore(false); // Все данные загружены
                 } else {

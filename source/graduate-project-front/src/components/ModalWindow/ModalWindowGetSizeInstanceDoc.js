@@ -2,9 +2,9 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import GetListInstancesDoc from "../GetInstance/GetListInstancesDoc";
 
-function ModalWindowInstanceDoc({ isOpen, onClose, documentId }) {
+function ModalWindowGetSizeInstanceDoc({ isOpen, onClose, documentId }) {
 
-  const landscapeStyle = window.matchMedia("(max-width: 1100px) and (orientation: landscape)").matches ? { marginTop: '-32px' } : {};
+  const landscapeStyle = window.matchMedia("(max-width: 1100px) and (orientation: landscape)").matches ? { marginTop: '0px' } : {};
   return (
     <Modal 
       show={isOpen} 
@@ -31,4 +31,4 @@ function ModalWindowInstanceDoc({ isOpen, onClose, documentId }) {
   );
 }
 
-export default ModalWindowInstanceDoc;
+export default ModalWindowGetSizeInstanceDoc;

@@ -41,7 +41,6 @@
 @media (max-width: 1040px) {
   .sidebar-container {
     position: absolute;
-    width: 100%; /* Используем ширину по умолчанию для боковой панели на мобильных устройствах */
   }
 }
 @media (max-width: 730px) {

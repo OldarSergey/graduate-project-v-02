@@ -56,7 +56,7 @@ function OutgoingDocWork() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`http://176.106.132.3:9982/api/Document/${nameProcedure}/${pageNumber}/${pageSize}`);
+                const response = await axios.get(`http://localhost:5254/api/Document/${nameProcedure}/${pageNumber}/${pageSize}`);
                 if (response.data.length === 0)  {
                     setHasMore(false); 
                 } else {
