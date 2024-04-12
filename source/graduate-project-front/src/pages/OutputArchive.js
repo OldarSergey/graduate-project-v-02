@@ -57,7 +57,7 @@ function OutputArchive(){
             </Col>
             <Col className="col-auto search-container" >
                 <button className="btn-custom-archive" onClick={handleOpenModal}>Архив</button> {/* Вызываем модальное окно по клику */}
-                <ModalWinwowGetArchive isOpen={isModalOpen} onClose={handleCloseModal} listArchive={archive} onArchiveClick={handleArchiveClick}  ></ModalWinwowGetArchive>
+                <ModalWinwowGetArchive isOpen={isModalOpen} onClose={handleCloseModal} listArchive={archive} onArchiveClick={handleArchiveClick} selectedYear={selectedYear} handleYearChange={handleYearChange}  ></ModalWinwowGetArchive>
             </Col>
 
         </Row>
