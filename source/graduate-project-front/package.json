@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@coreui/react": "^5.0.0",
     "@tanstack/react-query": "^5.22.2",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.3",

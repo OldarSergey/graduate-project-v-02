@@ -10,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IDocumentService, DocumentService>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 var configuration = builder.Configuration;
 

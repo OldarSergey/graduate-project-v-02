@@ -6,6 +6,7 @@ import './App.css';
 import IncomingDocSpent from './pages/IncomingDocSpent';
 import OutgoingDocWork from './pages/OutgoingDocWork';
 import OutputArchive from './pages/OutputArchive';
+import ManageDataEmployees from './pages/Employee/ManageDataEmployees';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/IncomingDocSpent" element={<IncomingDocSpent/>} />
         <Route path="/OutgoingDocWork" element={<OutgoingDocWork />} />
         <Route path="/OutputArchive" element={<OutputArchive />} />
+        <Route path='/ManageDataEmployees' element={<ManageDataEmployees/>}/>
       </Routes>
     </div>
   );

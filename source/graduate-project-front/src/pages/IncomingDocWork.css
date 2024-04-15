@@ -166,7 +166,7 @@
         width: 50%;
     }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
    .inputSearch{
         width: 159px;
         height: 50px;

@@ -32,6 +32,7 @@ const Sidebar = () => {
 
         <CDBSidebarContent className='mt-4'>
           <CDBSidebarMenu>
+            <Link to={"./ManageDataEmployees"}><CDBSidebarMenuItem >Сотрудники</CDBSidebarMenuItem></Link>
             <Link to={"./IncomingDocWork"}><CDBSidebarMenuItem icon="bi bi-envelope-arrow-down">Входящие</CDBSidebarMenuItem></Link>
             <Link to={"./OutgoingDocWork"}> <CDBSidebarMenuItem icon="bi bi-envelope-arrow-up">Исходящие</CDBSidebarMenuItem></Link>
             <CDBSidebarMenuItem icon="bi bi-file-earmark-check">На контроле</CDBSidebarMenuItem>
