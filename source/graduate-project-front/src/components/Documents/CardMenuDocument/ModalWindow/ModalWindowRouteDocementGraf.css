@@ -1,0 +1,5 @@
+.custom-modal {
+    max-width: 100vh !important; /* Ширина модального окна */
+    margin: auto; /* Центрирование модального окна */
+  }
+  

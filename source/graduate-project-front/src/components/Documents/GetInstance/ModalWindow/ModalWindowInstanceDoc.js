@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-import GetListInstancesDoc from "../GetInstance/GetListInstancesDoc";
+import GetListInstancesDoc from "../GetListInstancesDoc";
 
 function ModalWindowInstanceDoc({ isOpen, onClose, documentId }) {
 

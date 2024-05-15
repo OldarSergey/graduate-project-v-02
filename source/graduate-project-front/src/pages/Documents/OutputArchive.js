@@ -6,7 +6,7 @@ import "./OutputArchive.css"
 import CustomSelect from "./componentArchive/CustomSelect";
 import ArchiveList from "./componentArchive/ArchiveList";
 import DocumentArchive from "./componentArchive/DocumentArchive";
-import ModalWinwowGetArchive from "../components/ModalWindow/ModalWinwowGetArchive";
+import ModalWinwowGetArchive from "../../components/Documents/GetInstance/ModalWindow/ModalWinwowGetArchive";
 
 function OutputArchive(){
     const [archive, setArchive] = useState([]);

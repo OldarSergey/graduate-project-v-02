@@ -1,11 +1,11 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import IncomingDocWork from './pages/IncomingDocWork';
+import IncomingDocWork from './pages/Documents/IncomingDocWork';
 import Sidebar from './SideBar/SideBar';
 import './App.css';
-import IncomingDocSpent from './pages/IncomingDocSpent';
-import OutgoingDocWork from './pages/OutgoingDocWork';
-import OutputArchive from './pages/OutputArchive';
+import IncomingDocSpent from './pages/Documents/IncomingDocSpent';
+import OutgoingDocWork from './pages/Documents/OutgoingDocWork';
+import OutputArchive from './pages/Documents/OutputArchive';
 import ManageDataEmployees from './pages/Employee/ManageDataEmployees';
 
 function App() {

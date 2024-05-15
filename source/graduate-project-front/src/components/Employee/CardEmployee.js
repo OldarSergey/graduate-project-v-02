@@ -1,7 +1,7 @@
 import { useState, useEffect} from 'react';
 import axios from "axios";
 import './CardEmployee.css';
-import ModalDetailed from '../ModalWindow/Employee/ModalDetailed';
+import ModalDetailed from './ModalWindow/ModalDetailed';
 import "./CardEmployee.css"
 import { Button, Card, CardBody, CardText, CardTitle } from 'react-bootstrap';
 const CardEmployee = ({searchEmployee, sortEmployee})  => {

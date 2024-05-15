@@ -1,15 +1,13 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import "./IncomingDocWork.css"
 import { BiSearch } from 'react-icons/bi';
-import ModelTable from '../components/table/ModelTable';
+import ModelTable from '../../components/Documents/table/ModelTable';
 import { Dropdown } from 'react-bootstrap';
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
-import GetListInstancesDoc from '../components/GetInstance/GetListInstancesDoc';
-import ModalWindowGetSizeInstanceDoc from '../components/ModalWindow/ModalWindowGetSizeInstanceDoc';
-import ModalWindowInstanceDoc from '../components/ModalWindow/ModalWindowInstanceDoc';
-
+import GetListInstancesDoc from '../../components/Documents/GetInstance/GetListInstancesDoc';
+import ModalWindowInstanceDoc from '../../components/Documents/GetInstance/ModalWindow/ModalWindowInstanceDoc';
 function IncomingDocWork() {
     const [isOpenModal, setIsOpenModal] = useState(false); // Состояние открытости модального окна
     const [selectedItem, setSelectedItem] = useState('Фильтр'); 

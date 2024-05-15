@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
-import ModelTable from "../../components/table/ModelTable";
-import GetListInstancesDoc from "../../components/GetInstance/GetListInstancesDoc";
+import ModelTable from "../../../components/Documents/table/ModelTable";
+import GetListInstancesDoc from "../../../components/Documents/GetInstance/GetListInstancesDoc";
 import { Container, Row, Col } from 'react-bootstrap';
-import ModalWindowInstanceDoc from "../../components/ModalWindow/ModalWindowInstanceDoc";
+import ModalWindowInstanceDoc from "../../../components/Documents/GetInstance/ModalWindow/ModalWindowInstanceDoc";
 
 function DocumentArchive({ keyNote, year, search }) {
     const [docArchive, setDocArchive] = useState([]);

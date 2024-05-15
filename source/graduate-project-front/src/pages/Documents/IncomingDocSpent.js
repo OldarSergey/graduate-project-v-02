@@ -3,11 +3,10 @@ import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
 import { BiSearch } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
-import ModelTable from '../components/table/ModelTable';
+import ModelTable from '../../components/Documents/table/ModelTable';
 import { Dropdown } from 'react-bootstrap';
-import GetListInstancesDoc from '../components/GetInstance/GetListInstancesDoc';
-import ModalWindowInstanceDoc from '../components/ModalWindow/ModalWindowInstanceDoc';
-
+import GetListInstancesDoc from '../../components/Documents/GetInstance/GetListInstancesDoc';
+import ModalWindowInstanceDoc from '../../components/Documents/GetInstance/ModalWindow/ModalWindowInstanceDoc';
 function IncomingDocSpent() {
     const [documents, setDocuments] = useState([]);
     const [loading, setLoading] = useState(false);

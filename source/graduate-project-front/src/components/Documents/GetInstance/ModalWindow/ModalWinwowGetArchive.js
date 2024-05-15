@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import ArchiveList from '../../pages/componentArchive/ArchiveList';
-import CustomSelect from '../../pages/componentArchive/CustomSelect';
+import ArchiveList from '../../../../pages/Documents/componentArchive/ArchiveList';
+import CustomSelect from '../../../../pages/Documents/componentArchive/CustomSelect';
 
 function ModalWinwowGetArchive({ isOpen, onClose, listArchive, onArchiveClick,selectedYear, handleYearChange }) {
     return (
