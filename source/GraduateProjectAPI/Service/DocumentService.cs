@@ -55,6 +55,7 @@ namespace GraduateProjectAPI.Service
                                 PublicComment = reader.IsDBNull(reader.GetOrdinal("comment")) ? null : reader.GetString(reader.GetOrdinal("comment")),
                                 TypeDoc = reader.IsDBNull(reader.GetOrdinal("Note")) ? null : reader.GetString(reader.GetOrdinal("Note")),
                                 PrivateComment = reader.IsDBNull(reader.GetOrdinal("UserComment")) ? null : reader.GetString(reader.GetOrdinal("UserComment")),
+                                Security = reader.IsDBNull(reader.GetOrdinal("Privacy")) ? null : reader.GetString(reader.GetOrdinal("Privacy")),
                             };
                             documents.Add(document);
                         }

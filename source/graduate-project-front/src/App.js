@@ -7,6 +7,7 @@ import IncomingDocSpent from './pages/Documents/IncomingDocSpent';
 import OutgoingDocWork from './pages/Documents/OutgoingDocWork';
 import OutputArchive from './pages/Documents/OutputArchive';
 import ManageDataEmployees from './pages/Employee/ManageDataEmployees';
+import MainPage from './pages/KnowledgeBase/MainPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/OutgoingDocWork" element={<OutgoingDocWork />} />
         <Route path="/OutputArchive" element={<OutputArchive />} />
         <Route path='/ManageDataEmployees' element={<ManageDataEmployees/>}/>
+        <Route path='/MainPage' element={<MainPage/>}/>
       </Routes>
     </div>
   );

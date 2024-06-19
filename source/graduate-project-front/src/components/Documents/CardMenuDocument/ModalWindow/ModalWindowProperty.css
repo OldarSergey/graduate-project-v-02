@@ -1,5 +1,26 @@
+.modal-body {
+  overflow-x: auto;
+}
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table td, .table th {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
 .first-column {
-    width: 30%;
-    border-right: 1px solid #dee2e6;
-  }
-  
+  font-weight: bold;
+  max-width: 100px;
+}
+
+td {
+  word-wrap: break-word;
+}

@@ -21,18 +21,11 @@ const ContextMenu = ({ registrationNumber, posX, posY, onClose, onProperty, onAt
         <div className="context-menu-item" onClick={onProperty}>
           <span>Свойства</span>
         </div>
-        <div className="context-menu-item" onClick={onAttachment}>
-          <span>Вложения</span>
-        </div>
+
         <div className="context-menu-item" onClick={onRoute}>
           <span>Маршрут</span>
         </div>
-        <div className="context-menu-item" onClick={onPermission}>
-          <span>Разрешения</span>
-        </div>
-        <div className="context-menu-item" onClick={onEvent}>
-          <span>События</span>
-        </div>
+      
         <div className="context-menu-item cancel" onClick={onClose} style={{color:'red'}}>
           Отмена
         </div>

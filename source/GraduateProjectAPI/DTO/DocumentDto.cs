@@ -12,6 +12,7 @@ namespace GraduateProjectAPI.DTO
         public string PublicComment { get; set; }
         public string TypeDoc { get; set; }
         public string PrivateComment { get; set; }
+        public string Security { get; set; }
 
     }
 }

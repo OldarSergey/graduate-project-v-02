@@ -107,7 +107,7 @@ const ModelTable = React.forwardRef(({ documents, onDocumentClick }, ref) => {
                 )}
 
                 {openModaProperty !== null && (
-                  <ModalWindowProperty isOpen={true} onClose={() => closeModal(setOpenModalProperty)} documentId={openModaProperty}></ModalWindowProperty>
+                  <ModalWindowProperty isOpen={true} onClose={() => closeModal(setOpenModalProperty)} documentId={openContextMenuId} documents={documents}></ModalWindowProperty>
                 )}
                  {openModaRouteGraf !== null && (
                   <ModalWindowRouteDocementGraf isOpen={true} onClose={() => closeModal(setOpenModaRouteGraf)} documentId={openContextMenuId}></ModalWindowRouteDocementGraf>
