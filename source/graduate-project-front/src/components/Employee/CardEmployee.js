@@ -20,7 +20,7 @@ const CardEmployee = ({ searchEmployee, sortEmployee }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://176.106.132.3:9982/api/Employee?sortingOptions=${sortEmployee}`);
+                const response = await axios.get(`https://localhost:7252/api/Employee?sortingOptions=${sortEmployee}`);
                 setEmployees(response.data);
             } catch (error) {
                 console.error('Error fetching documents:', error);

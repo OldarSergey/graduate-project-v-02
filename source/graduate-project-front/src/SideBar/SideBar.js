@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css'; 
-import "./SideBar.css"
+import "./SideBar.css";
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -8,13 +8,19 @@ import {
   CDBSidebarMenuItem,
   CDBSidebarFooter,
 } from 'cdbreact';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Sidebar = () => {
+const Sidebar = ({ onLogout }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
+  };
+
+  const handleLogout = () => {
+    onLogout();
+    navigate('/');
   };
 
   return (
@@ -29,23 +35,20 @@ const Sidebar = () => {
         className={`custom-sidebar ${isCollapsed ? 'collapsed' : ''}`} 
         style={{ display: isCollapsed ? 'none' : 'block' }}
       >
-
         <CDBSidebarContent className='mt-4'>
           <CDBSidebarMenu>
-            <Link to={"./ManageDataEmployees"}><CDBSidebarMenuItem icon="bi bi-person">Сотрудники</CDBSidebarMenuItem></Link>
-            <Link to={"./IncomingDocWork"}><CDBSidebarMenuItem icon="bi bi-envelope-arrow-down">Входящие</CDBSidebarMenuItem></Link>
-            <Link to={"./OutgoingDocWork"}> <CDBSidebarMenuItem icon="bi bi-envelope-arrow-up">Исходящие</CDBSidebarMenuItem></Link>
-            <Link to={"./OutputArchive"}><CDBSidebarMenuItem icon="bi bi-archive">Архивы</CDBSidebarMenuItem></Link>
-            <Link to={"./MainPage"}><CDBSidebarMenuItem icon="bi bi-bookmarks">База знаний</CDBSidebarMenuItem></Link>
+            <Link to="/ManageDataEmployees"><CDBSidebarMenuItem icon="bi bi-person">Сотрудники</CDBSidebarMenuItem></Link>
+            <Link to="/IncomingDocWork"><CDBSidebarMenuItem icon="bi bi-envelope-arrow-down">Входящие</CDBSidebarMenuItem></Link>
+            <Link to="/OutgoingDocWork"><CDBSidebarMenuItem icon="bi bi-envelope-arrow-up">Исходящие</CDBSidebarMenuItem></Link>
+            <Link to="/OutputArchive"><CDBSidebarMenuItem icon="bi bi-archive">Архивы</CDBSidebarMenuItem></Link>
+            <Link to="/MainPage"><CDBSidebarMenuItem icon="bi bi-bookmarks">База знаний</CDBSidebarMenuItem></Link>
+            <Link onClick={handleLogout} ><CDBSidebarMenuItem >Выйти</CDBSidebarMenuItem></Link>
           </CDBSidebarMenu>
         </CDBSidebarContent>
-        <CDBSidebarFooter style={{ textAlign: 'center' }}>
-          <div className="sidebar-btn-wrapper" style={{ padding: '20px 5px' }}></div>
-        </CDBSidebarFooter>
+       
       </CDBSidebar>
     </div>
   );
 };
 
 export default Sidebar;
-
